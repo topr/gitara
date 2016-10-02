@@ -1,16 +1,2 @@
-[alias]
-        st = status
-        s = status --short
-        co = checkout
-        ci = commit
-        cm = commit -m
-        cma = commit -am
-        cmall = !git add -A && git commit -m
-        amend = commit --amend --no-edit
-        fix = commit --fixup
-        fixa = commit -a --fixup
-        squash = rebase -i --autosquash --autostash
-        staged = diff --name-only --cached
-        unstage = reset HEAD
-        pall = pull --all --prune
-
+[include]
+	path = config/alias
