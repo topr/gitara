@@ -1,3 +1,5 @@
 [include]
-	path = config/alias
-	path = config/help
+
+path = config/alias
+path = config/help
+path = config/push
