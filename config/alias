@@ -24,5 +24,7 @@ histfull = log --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset%C(yello
 llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso
 changelog = log --pretty=format:'%Cgreen%d %Creset%s' --date=iso
 
+serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+
 alias = "!f() { a=\"$1\"; shift; git config --global alias.\"$a\" \"$*\"; }; f"
 aliases = "!git config -l | grep alias | cut -c 7-"
