@@ -8,11 +8,18 @@ cm = commit -m
 cma = commit -am
 cmall = !git add -A && git commit -m
 amend = commit --amend --no-edit
+amenda = !git amend -a
+amendall = !git add -A && amend
 fix = commit --fixup
 fixa = commit -a --fixup
-rebi = rebase -i --autosquash --autostash
+reb = rebase --autosquash --autostash
+rebi = !git reb -i
+rebm = !git reb origin/master
 staged = diff --name-only --cached
 unstage = reset HEAD
+up = fetch origin
+upr = !git up && git rebm
+new = !git up && git co origin/master -b
 pall = pull --all --prune
 purr = pull --rebase
 
@@ -24,7 +31,10 @@ histfull = log --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset%C(yello
 llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=format:'%Y/%m/%d %H:%M:%S'
 changelog = log --pretty=format:'%Cgreen%d %Creset%s' --date=format:'%Y/%m/%d %H:%M:%S'
 
+clear = !sh -c 'git branch -l | grep -v "master" | xargs git branch -d'
+clearr = !sh -c 'git branch -r | grep -v "master" | xargs git branch -d -r'
+
 serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git   # access: git clone git://123.456.789.111/ project
 
 alias = "!f() { a=\"$1\"; shift; git config --global alias.\"$a\" \"$*\"; }; f"
-aliases = "!git config -l | grep alias | cut -c 7-"
+aliases = "!git config -l | grep 'alias.' | cut -c 7-"
