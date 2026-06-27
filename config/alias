@@ -2,6 +2,7 @@
 
 st = status
 s = status --short
+stashi = stash --include-untracked
 co = checkout
 ci = commit
 cm = commit -m
