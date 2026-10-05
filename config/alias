@@ -15,12 +15,13 @@ fix = commit --fixup
 fixa = commit -a --fixup
 reb = rebase --autosquash --autostash
 rebi = !git reb -i
-rebm = !git reb origin/master
+main = "!f() { b=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null) && echo ${b#origin/} && return; git show-ref --verify --quiet refs/remotes/origin/main && echo main || echo master; }; f"
+rebm = !git reb origin/$(git main)
 staged = diff --name-only --cached
 unstage = reset HEAD
 up = fetch origin
 upr = !git up && git rebm
-new = !git up && git co origin/master -b
+new = !git up && git co origin/$(git main) -b
 pall = pull --all --prune
 purr = pull --rebase
 
@@ -32,8 +33,8 @@ histfull = log --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset%C(yello
 llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=format:'%Y/%m/%d %H:%M:%S'
 changelog = log --pretty=format:'%Cgreen%d %Creset%s' --date=format:'%Y/%m/%d %H:%M:%S'
 
-clear = !sh -c 'git branch -l | grep -v "master" | xargs git branch -d'
-clearr = !sh -c 'git branch -r | grep -v "master" | xargs git branch -d -r'
+clear = "!git branch --format='%(refname:short)' | grep -vx \"$(git main)\" | xargs git branch -d"
+clearr = "!git branch -r | grep -v -e HEAD -e \"/$(git main)$\" | xargs git branch -d -r"
 
 serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git   # access: git clone git://123.456.789.111/ project
 
